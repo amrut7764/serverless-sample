@@ -1,5 +1,5 @@
 import json
-
+import tensorflow as tf
 
 def inferHandler(event, context):
     body = json.loads(event.get('body'))

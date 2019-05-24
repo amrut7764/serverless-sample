@@ -1,5 +1,5 @@
 import json
-
+import tensorflow as tf
 
 def uploadHandler(event, context):
     body = json.loads(event.get('body'))

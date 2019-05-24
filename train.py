@@ -1,5 +1,5 @@
 import json
-
+import tensorflow as tf
 
 def trainHandler(event, context):
     body = json.loads(event.get('body'))
