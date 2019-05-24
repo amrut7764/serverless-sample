@@ -1,7 +1,12 @@
+try:
+    import unzip_requirements
+except ImportError:
+    pass
 import json
 import tensorflow as tf
 
-def inferHandler(event, context):
+
+def infer_handler(event, context):
     body = json.loads(event.get('body'))
     response = {
         "statusCode": 200,

@@ -1,7 +1,13 @@
+try:
+    import unzip_requirements
+except ImportError:
+    pass
+
 import json
 import tensorflow as tf
 
-def uploadHandler(event, context):
+
+def upload_handler(event, context):
     body = json.loads(event.get('body'))
     response = {
         "statusCode": 200,

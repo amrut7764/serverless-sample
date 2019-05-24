@@ -17,13 +17,29 @@ service: tflambdademo # NOTE: update this with your service name
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    zip: true
+    slim: true
+    noDeploy:
+      - boto3
+      - botocore
+      - docutils
+      - jmespath
+      - pip
+      - python-dateutil
+      - s3transfer
+      - setuptools
+      - six
+      - tensorboard
+
 provider:
   name: aws
   region: us-west-2
   runtime: python3.6
   stage: dev
   profile: Personal
-
 
 # you can overwrite defaults here
 #  stage: dev
@@ -61,16 +77,16 @@ provider:
 functions:
   hello:
     handler: handler.hello
-  
+
   upload:
-    handler: upload.uploadHandler
+    handler: upload.upload_handler
     timeout: 30
     events:
       - http:
           path: upload
           method: post
   train:
-    handler: train.trainHandler
+    handler: train.train_handler
     timeout: 30
     memory: 3008
     events:
@@ -79,7 +95,7 @@ functions:
           method: post
           async: true
   infer:
-    handler: infer.inferHandler
+    handler: infer.infer_handler
     timeout: 30
     events:
       - http:
@@ -130,3 +146,6 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+plugins:
+  - serverless-python-requirements
